@@ -29,3 +29,24 @@ Mobile 92/100
 Desktop 95/100
 Changes made:
 1* Compressed pizzeria-sm.jpg and profilepic.jpg
+
+PSI analysis 3/26/15 18:34
+Mobile 94/100
+Desktop 95/100
+Changes made:
+1* Took Google PSI up on its offer to optimize my files.
+ * They returned a zip, describing the following in the MANIFEST document.
+ * 	
+ * This zip file contains optimized resources for http://181b88c7.ngrok.com/.
+ * The optimized resources are listed below in the format of: 
+ * filename: url
+ * Note: We only include up to 10 MB of optimized contents. If the
+ * optimized contents of your page are larger than 10 MB, we list them in
+ * this file too, with 'NOT INCLUDED' to indicate those URLs require
+ * further optimization.
+ * css/print.css: http://181b88c7.ngrok.com/css/print.css
+ * js/perfmatters.js: http://181b88c7.ngrok.com/js/perfmatters.js
+ * image/profilepic.jpg: http://181b88c7.ngrok.com/img/profilepic.jpg
+ * image/pizzeria-sm.jpg: http://181b88c7.ngrok.com/img/pizzeria-sm.jpg
+
+
