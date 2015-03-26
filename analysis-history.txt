@@ -1,0 +1,31 @@
+PSI analysis 3/26/15 17:29
+Mobile 70/100
+Desktop 83/100
+Changes made:
+1* Google analytics <script> made "async"
+2* print.css media query added: media= "print"
+
+PSI analysis 3/26/15 17:50
+Mobile 73/100
+Desktop 86/100
+Changes made:
+1* style.css code moved inline, within <style> tags within index.html
+	Reference: https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery#CSSattributes
+
+PSI analysis 3/26/15 18:07
+Mobile 70/100
+Desktop 86/100
+Changes made:
+1* Commented out web fonts link
+
+PSI analysis 3/26/15 18:11
+Mobile 82/100
+Desktop 87/100
+Changes made:
+1* Resized views/images/pizzeria.jpg to a 100x75 jpg located at /img/pizzeria-sm.jpg
+
+PSI analysis 3/26/15 18:30
+Mobile 92/100
+Desktop 95/100
+Changes made:
+1* Compressed pizzeria-sm.jpg and profilepic.jpg
