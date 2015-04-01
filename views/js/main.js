@@ -497,21 +497,25 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
+/* I gave items a broader scope; declared here due to its usage by
+ * the updatePositions() function, however it is defined below in
+ * pizza generating function below.
+ */
+var items;
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-
-  var items = document.querySelectorAll('.mover');
+  //var items = document.querySelectorAll('.mover'); // items var got globalized like the economy
   /* I added this 'place' var so the document object would only have
    * to be queried once per frame update.
    */
   var place = document.body.scrollTop;
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((place / 1250) + (i % 5));
+    // Changed the phase # to safeguard against constructive pizza interference
+    var phase = Math.sin((place / 1250) + (i % 11));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
-
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
   window.performance.mark("mark_end_frame");
@@ -522,26 +526,43 @@ function updatePositions() {
   }
 }
 
+/* This runs once to help keep the number of floating pies to the
+ * minimum necessary.
+ */
+var throwPies = function() {
+  var rows = 2,
+      row_space = document.documentElement.clientHeight / 2,
+      doc_width = document.documentElement.clientWidth,
+      col_space = (doc_width > 600 ? 240 : 160)
+      cols = Math.floor(doc_width / col_space),
+      rad = col_space/10,
+      pies = rows * cols;
+
+  /* I am decreasing the total number of floating pies. Only 24 (three rows)
+   * appear on my browser @ 1280x640 screen.
+   */
+  for (var i = 0; i < pies; i++) {
+    var elem = document.createElement('img');
+    elem.className = 'mover';
+    elem.src = 'images/pizza.png';
+    elem.style.height = 4 * rad + 'px';
+    // I trimmed width down to an integer valu e
+    elem.style.width = 3 * rad + 'px';
+    elem.basicLeft = Math.floor(((i % cols)+0.5) * col_space);
+    elem.style.top = ((Math.floor(i / cols) + 0.3) * row_space) + 'px';
+    document.querySelector("#movingPizzas1").appendChild(elem);
+  }
+  /* Once the floating pies have been (re-)initialized, that collection
+   * won't change with scrolling. So we reference the collection
+   * once, here. Note the updatePosition() definition above.
+   */
+  items = document.querySelectorAll('.mover');
+  updatePositions();
+}
+
+
+// Generates the sliding pizzas when the page loads.
+document.addEventListener('DOMContentLoaded', throwPies);
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
-// Generates the sliding pizzas when the page loads.
-document.addEventListener('DOMContentLoaded', function() {
-  var cols = 8;
-  var s = 256;
-  /* I am decreasing the total number of floating pizzas. Only 24 (three rows)
-   * appear on my browser @ 1280x640 screen.
-   */
-  for (var i = 0; i < 32; i++) {
-    var elem = document.createElement('img');
-    elem.className = 'mover';
-    elem.src = "images/pizza.png";
-    elem.style.height = "100px";
-    // I trimmed width down to an integer value
-    elem.style.width = "73px";
-    elem.basicLeft = Math.floor((i % cols) * s);
-    elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
-  }
-  updatePositions();
-});

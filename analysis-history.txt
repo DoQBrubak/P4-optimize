@@ -50,3 +50,14 @@ Changes made:
  * image/pizzeria-sm.jpg: http://181b88c7.ngrok.com/img/pizzeria-sm.jpg
 
 
+
+
+
+
+FPS Exercise - Resources & Reflections
+1* I considered using jQuery to speed things up, until I read how it tends to do 
+ * quite the contrary:
+ * http://stackoverflow.com/questions/11503534/jquery-vs-document-queryselectorall
+
+2* I referenced SO to cope with window resizing.
+ * http://stackoverflow.com/questions/3437786/get-the-size-of-the-screen-current-web-page-and-browser-window
