@@ -404,21 +404,13 @@ var resizePizzas = function(size) {
 
   // Changes the value for the size of the pizza above the slider
   function changeSliderLabel(size) {
-    switch(size) {
-      case "1":
-        document.querySelector("#pizzaSize").innerHTML = "Small";
-        return;
-      case "2":
-        document.querySelector("#pizzaSize").innerHTML = "Medium";
-        return;
-      case "3":
-        document.querySelector("#pizzaSize").innerHTML = "Large";
-        return;
-      default:
-        console.log("bug in changeSliderLabel");
-    }
+    /* I made expressed this control more concise, in the interest
+     * of not repeating one's self.
+     */
+    var lookUp = {1:'Small',2:'Medium',3:'Large'};
+    document.getElementById('pizzaSize').innerHTML = lookUp[size];
   }
-
+  
   changeSliderLabel(size);
 
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
@@ -448,12 +440,17 @@ var resizePizzas = function(size) {
     return dx;
   }
 
+
+  var sinkers = document.getElementsByClassName('randomPizzaContainer');
   // Iterates through pizza elements on the page and changes their widths
+  /* I replaced... document.querySelectorAll(".randomPizzaContainer")
+   * with references to the global 'sinkers' object.
+   */
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    for (var i = 0; i < sinkers.length; i++) {
+      var dx = determineDx(sinkers[i], size);
+      var newwidth = (sinkers[i].offsetWidth + dx) + 'px';
+      sinkers[i].style.width = newwidth;
     }
   }
 
@@ -465,7 +462,9 @@ var resizePizzas = function(size) {
   var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
   /* Changed this line because displaying the 0th index each time wasn't very
    * very helpful...
-   * console.log("Time to resize pizzas: " + timeToResize[0].duration + "ms"); */
+   * http://stackoverflow.com/questions/3216013/get-the-last-item-in-an-array
+   * console.log("Time to resize pizzas: " + timeToResize[0].duration + "ms");
+   */
   console.log("Time to resize pizzas: " + timeToResize.slice(-1)[0].duration + " ms");
 };
 
