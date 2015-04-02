@@ -398,6 +398,11 @@ var pizzaElementGenerator = function(i) {
   return pizzaContainer;
 };
 
+/* The sinkers var is defined once pizzaElementGenerator() has run.
+ * It will be used by resizePizzas().
+ */
+var sinkers = document.getElementsByClassName('randomPizzaContainer');
+
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) { 
   window.performance.mark("mark_start_resize");   // User Timing API function
@@ -440,16 +445,21 @@ var resizePizzas = function(size) {
     return dx;
   }
 
+  /* These variables can be here, defined once per call to 
+   * resizePizzas(). Their previous usage within changePizzaSlices()
+   * was a big bottleneck. 
+   */
+  var dx = determineDx(sinkers[0], size);
+  var newwidth = (sinkers[0].offsetWidth + dx) + 'px';
 
-  var sinkers = document.getElementsByClassName('randomPizzaContainer');
-  // Iterates through pizza elements on the page and changes their widths
-  /* I replaced... document.querySelectorAll(".randomPizzaContainer")
+  /* Iterate through pizza elements on the page and changes their widths
+   * I replaced... document.querySelectorAll(".randomPizzaContainer")
    * with references to the global 'sinkers' object.
+   * More importantly, I extracted the calculation of newsize and dx to
+   * a larger scope, so it doesn't have to happen for each piece of pie.
    */
   function changePizzaSizes(size) {
     for (var i = 0; i < sinkers.length; i++) {
-      var dx = determineDx(sinkers[i], size);
-      var newwidth = (sinkers[i].offsetWidth + dx) + 'px';
       sinkers[i].style.width = newwidth;
     }
   }
