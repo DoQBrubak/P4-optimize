@@ -463,7 +463,10 @@ var resizePizzas = function(size) {
   window.performance.mark("mark_end_resize");
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
   var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
-  console.log("Time to resize pizzas: " + timeToResize[0].duration + "ms");
+  /* Changed this line because displaying the 0th index each time wasn't very
+   * very helpful...
+   * console.log("Time to resize pizzas: " + timeToResize[0].duration + "ms"); */
+  console.log("Time to resize pizzas: " + timeToResize.slice(-1)[0].duration + " ms");
 };
 
 window.performance.mark("mark_start_generating"); // collect timing data
