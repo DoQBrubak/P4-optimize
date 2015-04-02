@@ -550,13 +550,15 @@ var throwPies = function() {
     elem.style.width = 3 * rad + 'px';
     elem.basicLeft = Math.floor(((i % cols)+0.5) * col_space);
     elem.style.top = ((Math.floor(i / cols) + 0.3) * row_space) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    // Changed this from document.querySelector('#movingPizzas1')
+    document.getElementById('movingPizzas1').appendChild(elem);
   }
   /* Once the floating pies have been (re-)initialized, that collection
    * won't change with scrolling. So we reference the collection
    * once, here. Note the updatePosition() definition above.
    */
-  items = document.querySelectorAll('.mover');
+  // Changed this from document.querySelector('.mover')
+  items = document.getElementsByClassName('mover');
   updatePositions();
 }
 
