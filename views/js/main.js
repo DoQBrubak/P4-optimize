@@ -500,24 +500,24 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
-/* I gave items a broader scope; declared here due to its usage by
+/* I gave floaters a broader scope; declared here due to its usage by
  * the updatePositions() function, however it is defined below in
  * pizza generating function below.
  */
-var items;
+var floaters;
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-  //var items = document.querySelectorAll('.mover'); // items var got globalized like the economy
+  //var floaters = document.querySelectorAll('.mover'); // floaters var got globalized like the economy
   /* I added this 'place' var so the document object would only have
    * to be queried once per frame update.
    */
   var place = document.body.scrollTop;
-  for (var i = 0; i < items.length; i++) {
+  for (var i = 0; i < floaters.length; i++) {
     // Changed the phase # to safeguard against constructive pizza interference
     var phase = Math.sin((place / 1250) + (i % 11));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    floaters[i].style.left = floaters[i].basicLeft + 100 * phase + 'px';
   }
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -561,7 +561,7 @@ var throwPies = function() {
    * once, here. Note the updatePosition() definition above.
    */
   // Changed this from document.querySelector('.mover')
-  items = document.getElementsByClassName('mover');
+  floaters = document.getElementsByClassName('mover');
   updatePositions();
 }
 
