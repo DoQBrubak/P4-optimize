@@ -58,13 +58,26 @@ http://stackoverflow.com/questions/3437786/get-the-size-of-the-screen-current-we
 ## Last task for myself:
 ### Analyze Main.js for adherance to style guidelines
 ```
-var pizzaIngredients = {}; // semicolon following variable declaration, without whitespace
+// semicolon following variable declaration, without whitespace
+var pizzaIngredients = {};
+
+// No semicolon following function declaration
+function randomName() {
+  var randomNumberAdj = parseInt(Math.random() * adjectives.length);
+  var randomNumberNoun = parseInt(Math.random() * nouns.length);
+  return generator(adjectives[randomNumberAdj], nouns[randomNumberNoun]);
+}
+
+// semicolon following function expressionvar selectRandomMeat = function() {
+  var randomMeat = pizzaIngredients.meats[Math.floor((Math.random() * pizzaIngredients.meats.length))];
+  return randomMeat;
+};
+
+// No semicolon following curly braces closing control statements
+for (var i = 0; i < numberOfMeats; i++) {
+  pizza = pizza + ingredientItemizer(selectRandomMeat());
+ }
 ```
-
-
-
-
-
 
 
 ## Website Performance Optimization portfolio project

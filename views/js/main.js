@@ -412,7 +412,7 @@ var resizePizzas = function(size) {
     /* I made expressed this control more concise, in the interest
      * of not repeating one's self.
      */
-    var lookUp = {1:'Small',2:'Medium',3:'Large'};
+    var lookUp = {1:'Small', 2:'Medium', 3:'Large'};
     document.getElementById('pizzaSize').innerHTML = lookUp[size];
   }
   
@@ -436,8 +436,7 @@ var resizePizzas = function(size) {
           return 0.5;
         default:
           console.log("bug in sizeSwitcher");
-      }
-    }
+    }}
 
     var newsize = sizeSwitcher(size);
     var dx = (newsize - oldsize) * windowwidth;
@@ -461,8 +460,7 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
     for (var i = 0; i < stretchPizzas.length; i++) {
       stretchPizzas[i].style.width = newwidth;
-    }
-  }
+  }}
 
   changePizzaSizes(size);
 
@@ -572,7 +570,7 @@ var throwPies = function() {
   // Changed this from document.querySelector('.mover')
   floatPizzas = document.getElementsByClassName('mover');
   updatePositions();
-}
+};
 
 
 // Generates the sliding pizzas when the page loads.
