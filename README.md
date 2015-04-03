@@ -1,40 +1,40 @@
-PSI analysis 3/26/15 17:29
+### PSI analysis 3/26/15 17:29
 Mobile 70/100
 Desktop 83/100
-Changes made:
-1* Google analytics made "async"
-2* print.css media query added: media= "print"
+#### Changes made:
+1: Google analytics made "async"
+2: print.css media query added: media= "print"
 
-PSI analysis 3/26/15 17:50
+### PSI analysis 3/26/15 17:50
 Mobile 73/100
 Desktop 86/100
 Changes made:
-1* style.css code moved inline, within style tags within index.html
+1: style.css code moved inline, within style tags within index.html
 	Reference: https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery#CSSattributes
 
-PSI analysis 3/26/15 18:07
+### PSI analysis 3/26/15 18:07
 Mobile 70/100
 Desktop 86/100
-Changes made:
-1* Commented out web fonts link
+### Changes made:
+1: Commented out web fonts link
 
-PSI analysis 3/26/15 18:11
+#### PSI analysis 3/26/15 18:11
 Mobile 82/100
 Desktop 87/100
-Changes made:
-1* Resized views/images/pizzeria.jpg to a 100x75 jpg located at /img/pizzeria-sm.jpg
+### Changes made:
+1: Resized views/images/pizzeria.jpg to a 100x75 jpg located at /img/pizzeria-sm.jpg
 
-PSI analysis 3/26/15 18:30
+#### PSI analysis 3/26/15 18:30
 Mobile 92/100
 Desktop 95/100
-Changes made:
-1* Compressed pizzeria-sm.jpg and profilepic.jpg
+### Changes made:
+1: Compressed pizzeria-sm.jpg and profilepic.jpg
 
-PSI analysis 3/26/15 18:34
+#### PSI analysis 3/26/15 18:34
 Mobile 94/100
 Desktop 95/100
 Changes made:
-1* Took Google PSI up on its offer to optimize my files.
+### 1: Took Google PSI up on its offer to optimize my files.
  * They returned a zip, describing the following in the MANIFEST document.
  * 	
  * This zip file contains optimized resources for http://181b88c7.ngrok.com/.
@@ -51,16 +51,14 @@ Changes made:
 
 
 
+## FPS Exercise - Resources & Reflections
+#### 1: I considered using jQuery to speed things up, until I read how it tends to do quite the contrary:
+http://stackoverflow.com/questions/11503534/jquery-vs-document-queryselectorall
+
+#### 2: I referenced S/O to cope with window resizing.
+http://stackoverflow.com/questions/3437786/get-the-size-of-the-screen-current-web-page-and-browser-window
 
 
-
-FPS Exercise - Resources & Reflections
-1* I considered using jQuery to speed things up, until I read how it tends to do 
- * quite the contrary:
- * http://stackoverflow.com/questions/11503534/jquery-vs-document-queryselectorall
-
-2* I referenced SO to cope with window resizing.
- * http://stackoverflow.com/questions/3437786/get-the-size-of-the-screen-current-web-page-and-browser-window
 
 
 
