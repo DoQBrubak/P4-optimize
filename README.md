@@ -2,41 +2,41 @@
 Mobile 70/100
 Desktop 83/100
 #### Changes made:
-1: Google analytics made "async"
-2: print.css media query added: media= "print"
+1. Google analytics made "async"
+2. print.css media query added: media= "print"
 
 ### PSI analysis 3/26/15 17:50
 Mobile 73/100
 Desktop 86/100
 Changes made:
-1: style.css code moved inline, within style tags within index.html
+1. style.css code moved inline, within style tags within index.html
 	Reference: https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery#CSSattributes
 
 ### PSI analysis 3/26/15 18:07
 Mobile 70/100
 Desktop 86/100
 ### Changes made:
-1: Commented out web fonts link
+1. Commented out web fonts link
 
 #### PSI analysis 3/26/15 18:11
 Mobile 82/100
 Desktop 87/100
 ### Changes made:
-1: Resized views/images/pizzeria.jpg to a 100x75 jpg located at /img/pizzeria-sm.jpg
+1. Resized views/images/pizzeria.jpg to a 100x75 jpg located at /img/pizzeria-sm.jpg
 
 #### PSI analysis 3/26/15 18:30
 Mobile 92/100
 Desktop 95/100
 ### Changes made:
-1: Compressed pizzeria-sm.jpg and profilepic.jpg
+1. Compressed pizzeria-sm.jpg and profilepic.jpg
 
 #### PSI analysis 3/26/15 18:34
 Mobile 94/100
 Desktop 95/100
-Changes made:
-### 1: Took Google PSI up on its offer to optimize my files.
- * They returned a zip, describing the following in the MANIFEST document.
- * 	
+### Changes made:
+1. Took Google PSI up on its offer to optimize my files.
+They returned a zip, describing the following in the MANIFEST document.
+
  * This zip file contains optimized resources for http://181b88c7.ngrok.com/.
  * The optimized resources are listed below in the format of: 
  * filename: url
@@ -59,6 +59,12 @@ http://stackoverflow.com/questions/11503534/jquery-vs-document-queryselectorall
 http://stackoverflow.com/questions/3437786/get-the-size-of-the-screen-current-web-page-and-browser-window
 
 
+
+## Last task for myself:
+### Analyze Main.js for adherance to style guidelines
+```
+var pizzaIngredients = {}; // semicolon following variable declaration, without whitespace
+```
 
 
 
