@@ -8,42 +8,37 @@ Desktop 83/100
 ### PSI analysis 3/26/15 17:50
 Mobile 73/100
 Desktop 86/100
-Changes made:
+####Changes made:
 1. style.css code moved inline, within style tags within index.html
 	Reference: https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery#CSSattributes
 
 ### PSI analysis 3/26/15 18:07
 Mobile 70/100
 Desktop 86/100
-### Changes made:
+#### Changes made:
 1. Commented out web fonts link
 
-#### PSI analysis 3/26/15 18:11
+### PSI analysis 3/26/15 18:11
 Mobile 82/100
 Desktop 87/100
-### Changes made:
+#### Changes made:
 1. Resized views/images/pizzeria.jpg to a 100x75 jpg located at /img/pizzeria-sm.jpg
 
-#### PSI analysis 3/26/15 18:30
+### PSI analysis 3/26/15 18:30
 Mobile 92/100
 Desktop 95/100
-### Changes made:
+#### Changes made:
 1. Compressed pizzeria-sm.jpg and profilepic.jpg
 
-#### PSI analysis 3/26/15 18:34
+### PSI analysis 3/26/15 18:34
 Mobile 94/100
 Desktop 95/100
-### Changes made:
+#### Changes made:
 1. Took Google PSI up on its offer to optimize my files.
 They returned a zip, describing the following in the MANIFEST document.
 
- * This zip file contains optimized resources for http://181b88c7.ngrok.com/.
- * The optimized resources are listed below in the format of: 
- * filename: url
- * Note: We only include up to 10 MB of optimized contents. If the
- * optimized contents of your page are larger than 10 MB, we list them in
- * this file too, with 'NOT INCLUDED' to indicate those URLs require
- * further optimization.
+ This zip file contains optimized resources for http://181b88c7.ngrok.com/. The optimized resources are listed below in the format of: filename: url
+ * Note: We only include up to 10 MB of optimized contents. If the optimized contents of your page are larger than 10 MB, we list them in this file too, with 'NOT INCLUDED' to indicate those URLs require further optimization.
  * css/print.css: http://181b88c7.ngrok.com/css/print.css
  * js/perfmatters.js: http://181b88c7.ngrok.com/js/perfmatters.js
  * image/profilepic.jpg: http://181b88c7.ngrok.com/img/profilepic.jpg

@@ -1,24 +1,24 @@
 /*
-Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
+Welcome to the 60fps project! My goal is to make Cam's Pizzeria website run
 jank-free at 60 frames per second.
 
 There are two major issues in this code that lead to sub-60fps performance. Can
 you spot and fix both?
-
 
 Built into the code, you'll find a few instances of the User Timing API
 (window.performance), which will be console.log()ing frame rate data into the
 browser console. To learn more about User Timing API, check out:
 http://www.html5rocks.com/en/tutorials/webperformance/usertiming/
 
-Creator:
-Cameron Pittman, Udacity Course Developer
+Creators:
+Daddy: Quintin Brubaker, Udacity Course student
+Mommy: Cameron Pittman, Udacity Course Developer
 cameron *at* udacity *dot* com
 */
 
-// As you may have realized, this website randomly generates pizzas.
+
 // Here are arrays of all possible pizza ingredients.
-var pizzaIngredients = {};
+var pizzaIngredients = {}; // semicolon following variable declaration, without whitespace
 pizzaIngredients.meats = [
   "Pepperoni",
   "Sausage",
@@ -398,10 +398,10 @@ var pizzaElementGenerator = function(i) {
   return pizzaContainer;
 };
 
-/* The sinkers var is defined once pizzaElementGenerator() has run.
+/* The stretchPizzas var is defined once pizzaElementGenerator() has run.
  * It will be used by resizePizzas().
  */
-var sinkers = document.getElementsByClassName('randomPizzaContainer');
+var stretchPizzas = document.getElementsByClassName('randomPizzaContainer');
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) { 
@@ -449,18 +449,18 @@ var resizePizzas = function(size) {
    * resizePizzas(). Their previous usage within changePizzaSlices()
    * was a big bottleneck. 
    */
-  var dx = determineDx(sinkers[0], size);
-  var newwidth = (sinkers[0].offsetWidth + dx) + 'px';
+  var dx = determineDx(stretchPizzas[0], size);
+  var newwidth = (stretchPizzas[0].offsetWidth + dx) + 'px';
 
   /* Iterate through pizza elements on the page and changes their widths
    * I replaced... document.querySelectorAll(".randomPizzaContainer")
-   * with references to the global 'sinkers' object.
+   * with references to the global 'stretchPizzas' object.
    * More importantly, I extracted the calculation of newsize and dx to
    * a larger scope, so it doesn't have to happen for each piece of pie.
    */
   function changePizzaSizes(size) {
-    for (var i = 0; i < sinkers.length; i++) {
-      sinkers[i].style.width = newwidth;
+    for (var i = 0; i < stretchPizzas.length; i++) {
+      stretchPizzas[i].style.width = newwidth;
     }
   }
 
@@ -509,24 +509,24 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
-/* I gave floaters a broader scope; declared here due to its usage by
+/* I gave floatPizzas a broader scope; declared here due to its usage by
  * the updatePositions() function, however it is defined below in
  * pizza generating function below.
  */
-var floaters;
+var floatPizzas;
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-  //var floaters = document.querySelectorAll('.mover'); // floaters var got globalized like the economy
+  //var floatPizzas = document.querySelectorAll('.mover'); // floatPizzas var got globalized like the economy
   /* I added this 'place' var so the document object would only have
    * to be queried once per frame update.
    */
   var place = document.body.scrollTop;
-  for (var i = 0; i < floaters.length; i++) {
+  for (var i = 0; i < floatPizzas.length; i++) {
     // Changed the phase # to safeguard against constructive pizza interference
     var phase = Math.sin((place / 1250) + (i % 11));
-    floaters[i].style.left = floaters[i].basicLeft + 100 * phase + 'px';
+    floatPizzas[i].style.left = floatPizzas[i].basicLeft + 100 * phase + 'px';
   }
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -570,7 +570,7 @@ var throwPies = function() {
    * once, here. Note the updatePosition() definition above.
    */
   // Changed this from document.querySelector('.mover')
-  floaters = document.getElementsByClassName('mover');
+  floatPizzas = document.getElementsByClassName('mover');
   updatePositions();
 }
 
