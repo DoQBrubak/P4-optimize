@@ -11,9 +11,8 @@ browser console. To learn more about User Timing API, check out:
 http://www.html5rocks.com/en/tutorials/webperformance/usertiming/
 
 Creators:
-Daddy: Quintin Brubaker, Udacity Course student
+Quintin Brubaker, Udacity Course student
 Mommy: Cameron Pittman, Udacity Course Developer
-cameron *at* udacity *dot* com
 */
 
 
@@ -536,8 +535,10 @@ function updatePositions() {
   }
 }
 
-/* This runs once to help keep the number of floating pies to the
- * minimum necessary.
+/* This helps keep the number of floating pies to the minimum necessary.
+ * It is only called ONCE, by document.addEventListener('DOMContentLoaded'...
+ * so it doesn't seem like it should have any bearing on ongoing FPS
+ * calculation demands. 
  */
 var throwPies = function() {
   var rows = 2,
