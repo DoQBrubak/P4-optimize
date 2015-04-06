@@ -520,7 +520,7 @@ function updatePositions() {
    * to be queried once per frame update.
    */
   var place = document.body.scrollTop;
-  for (var i = 0; i < floatPizzas.length; i++) {
+  for (var i = 0; i < floaterCount; i++) {
     // Changed the phase # to safeguard against constructive pizza interference
     var phase = Math.sin((place / 1250) + (i % 11));
     floatPizzas[i].style.left = floatPizzas[i].basicLeft + 100 * phase + 'px';
@@ -535,22 +535,27 @@ function updatePositions() {
   }
 }
 
-/* This helps keep the number of floating pies to the minimum necessary.
- * It is only called ONCE, by document.addEventListener('DOMContentLoaded'...
+/* This gets designated by dropFloaters(), and saves updatePositions() the
+ * trouble of calculating floatPizzas.length each update;
+ */
+var floaterCount;
+
+/* This helps keep the number of floating pies ("floaters") to the minimum
+ * necessary. It is only called by document.addEventListener('DOMContentLoaded')
  * so it doesn't seem like it should have any bearing on ongoing FPS
  * calculation demands. 
  */
-var throwPies = function() {
+var dropFloaters = function() {
   var rows = 2,
       row_space = document.documentElement.clientHeight / 2,
       doc_width = document.documentElement.clientWidth,
       col_space = (doc_width > 600 ? 240 : 160)
       cols = Math.floor(doc_width / col_space),
-      rad = col_space/10,
+      rad = col_space / 10,
       pies = rows * cols;
 
   /* I am decreasing the total number of floating pies. Only 24 (three rows)
-   * appear on my browser @ 1280x640 screen.
+   * appeared on my browser @ 1280x640 screen.
    */
   for (var i = 0; i < pies; i++) {
     var elem = document.createElement('img');
@@ -559,7 +564,7 @@ var throwPies = function() {
     elem.style.height = 4 * rad + 'px';
     // I trimmed width down to an integer valu e
     elem.style.width = 3 * rad + 'px';
-    elem.basicLeft = Math.floor(((i % cols)+0.5) * col_space);
+    elem.basicLeft = Math.floor(((i % cols) + 0.5) * col_space);
     elem.style.top = ((Math.floor(i / cols) + 0.3) * row_space) + 'px';
     // Changed this from document.querySelector('#movingPizzas1')
     document.getElementById('movingPizzas1').appendChild(elem);
@@ -570,12 +575,14 @@ var throwPies = function() {
    */
   // Changed this from document.querySelector('.mover')
   floatPizzas = document.getElementsByClassName('mover');
+  floaterCount = floatPizzas.length;
   updatePositions();
 };
 
 
+
 // Generates the sliding pizzas when the page loads.
-document.addEventListener('DOMContentLoaded', throwPies);
+document.addEventListener('DOMContentLoaded', dropFloaters);
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
