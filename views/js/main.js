@@ -524,7 +524,7 @@ function updatePositions() {
     phases = [];
   // These calculations use magic numbers I refined to my tastes iteratively
   phases[0] = Math.sin(place/700);
-  phases[1] = Math.sin(place/1100+2.7);
+  phases[1] = Math.sin(place/1100+2);
   for (var i = 0; i < floaterCount; i++) {
     pixels = parseFloat(floatPizzas[i].basicLeft) + 60 * phases[i%2];
     floatPizzas[i].style.transform = 'translateX(' + pixels + 'px)';
