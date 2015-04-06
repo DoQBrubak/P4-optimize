@@ -496,20 +496,20 @@ var frame = 0;
 function logAverageFrame(times) {   // times is the array of User Timing measurements from updatePositions()
   var numberOfEntries = times.length;
   var sum = 0;
-  for (var i = numberOfEntries - 1; i > numberOfEntries - 11; i--) {
+  for (var i = numberOfEntries - 1; i > numberOfEntries - 51; i--) {
     sum = sum + times[i].duration;
   }
-  console.log('Average time to generate last 10 frames: ' + sum / 10 + 'ms');
+  console.log('Average time to generate last 50 frames: ' + sum / 50 + 'ms');
 }
 
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
-/* I gave floatPizzas a broader scope; declared here due to its usage by
+/* I gave floatingPizzas a broader scope; declared here due to its usage by
  * the updatePositions() function, however it is defined below in
  * pizza generating function below.
  */
-var floatPizzas;
+var floatingPizzas;
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
@@ -523,23 +523,27 @@ function updatePositions() {
     pixels,
     phases = [];
   // These calculations use magic numbers I refined to my tastes iteratively
-  phases[0] = Math.sin(place/700);
-  phases[1] = Math.sin(place/1100+2);
+  phases[0] = 60 * Math.sin(place/700);
+  phases[1] = 60 * Math.sin(place/1100+2);
   for (var i = 0; i < floaterCount; i++) {
-    pixels = parseFloat(floatPizzas[i].basicLeft) + 60 * phases[i%2];
-    floatPizzas[i].style.transform = 'translateX(' + pixels + 'px)';
+    pixels = floatingPizzas[i].basicLeft + phases[i%2];
+    /* I tried using transfrom:translateX, but it seemed to hinder rather than
+     * help my rendering.
+     * floatingPizzas[i].style.transform = 'translateX(' + pixels + 'px)';
+     */
+    floatingPizzas[i].style.left = pixels + 'px';
   }
   // User Timing API makes it easy to create custom metrics.
   window.performance.mark('mark_end_frame');
   window.performance.measure('measure_frame_duration', 'mark_start_frame', 'mark_end_frame');
-  if (frame % 10 === 0) {
+  if (frame % 50 === 0) {
     var timesToUpdatePosition = window.performance.getEntriesByName('measure_frame_duration');
     logAverageFrame(timesToUpdatePosition);
   }
 }
 
 /* This gets designated by dropFloaters(), and saves updatePositions() the
- * trouble of calculating floatPizzas.length each update;
+ * trouble of calculating floatingPizzas.length each update;
  */
 var floaterCount;
 
@@ -565,9 +569,8 @@ var dropFloaters = function() {
     // Removed .height and .width from JS to CSS control
     elem.className = 'floater';
     elem.src = 'images/pizza.png';
-    elem.basicLeft = Math.floor(((i % cols) + 0.5) * col_space) - doc_width/2;
+    elem.basicLeft = Math.floor(((i % cols) + 0.5) * col_space);// - doc_width/2;
     elem.style.top = ((Math.floor(i / cols) + 0.3) * row_space) + 'px';
-    elem.style.transform = 'translateX(50px)';
     // Changed this from document.querySelector('#movingPizzas1')
     document.getElementById('movingPizzas1').appendChild(elem);
   }
@@ -576,8 +579,8 @@ var dropFloaters = function() {
    * once, here. Note the updatePosition() definition above.
    */
   // Changed this from document.querySelector('.floater')
-  floatPizzas = document.getElementsByClassName('floater');
-  floaterCount = floatPizzas.length;
+  floatingPizzas = document.getElementsByClassName('floater');
+  floaterCount = floatingPizzas.length;
   updatePositions();
 };
 
