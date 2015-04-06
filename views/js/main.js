@@ -511,27 +511,33 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
  */
 var floatingPizzas;
 // Moves the sliding background pizzas based on scroll position
+var updatePhases
 function updatePositions() {
   frame++;
   window.performance.mark('mark_start_frame');
+  /* Using this if control means only half of frame transitions demand
+   * positional recalculation.
+   */
+  if (frame % 2 != 0) {
   /* CS Barbie says 'Math is hard' - so let's do less of it. 
    * Now the place var only gets determined once per scroll event.
    * Use of the phases array means Math.sin() only has to work twice - rather
    * than my previous 11 - times per call.
    */
-  var place = document.body.scrollTop,
-    pixels,
-    phases = [];
-  // These calculations use magic numbers I refined to my tastes iteratively
-  phases[0] = 60 * Math.sin(place/700);
-  phases[1] = 60 * Math.sin(place/1100+2);
-  for (var i = 0; i < floaterCount; i++) {
-    pixels = floatingPizzas[i].basicLeft + phases[i%2];
-    /* I tried using transfrom:translateX, but it seemed to hinder rather than
-     * help my rendering.
-     * floatingPizzas[i].style.transform = 'translateX(' + pixels + 'px)';
-     */
-    floatingPizzas[i].style.left = pixels + 'px';
+    var place = document.body.scrollTop,
+      pixels,
+      phases = [];
+    // These calculations use magic numbers I refined to my tastes iteratively
+    phases[0] = 40 * Math.sin(place/1700);
+    phases[1] = 40 * Math.sin(place/1200+2);
+    for (var i = 0; i < floaterCount; i++) {
+      pixels = floatingPizzas[i].basicLeft + phases[i%2];
+      /* I tried using transfrom:translateX, but it seemed to hinder rather than
+       * help my rendering.
+       * floatingPizzas[i].style.transform = 'translateX(' + pixels + 'px)';
+       */
+      floatingPizzas[i].style.left = pixels + 'px';
+    }
   }
   // User Timing API makes it easy to create custom metrics.
   window.performance.mark('mark_end_frame');
@@ -566,7 +572,7 @@ var dropFloaters = function() {
    */
   for (var i = 0; i < pies; i++) {
     var elem = document.createElement('img');
-    // Removed .height and .width from JS to CSS control
+    // Removed control of .height and .width from JS to style.css
     elem.className = 'floater';
     elem.src = 'images/pizza.png';
     elem.basicLeft = Math.floor(((i % cols) + 0.5) * col_space);// - doc_width/2;
