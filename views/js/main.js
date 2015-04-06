@@ -12,7 +12,7 @@ http://www.html5rocks.com/en/tutorials/webperformance/usertiming/
 
 Creators:
 Quintin Brubaker, Udacity Course student
-Mommy: Cameron Pittman, Udacity Course Developer
+Cameron Pittman, Udacity Course Developer
 */
 
 
@@ -514,25 +514,22 @@ var floatPizzas;
 function updatePositions() {
   frame++;
   window.performance.mark('mark_start_frame');
-  //var floatPizzas = document.querySelectorAll('.floater'); // floatPizzas var got globalized like the economy
-  /* I added this 'place' var so the document object would only have
-   * to be queried once per frame update.
+  /* CS Barbie says 'Math is hard' - so let's do less of it. 
+   * Now the place var only gets determined once per scroll event.
+   * Use of the phases array means Math.sin() only has to work twice - rather
+   * than my previous 11 - times per call.
    */
-  var place = document.body.scrollTop;
-  /* CS Barbie says 'Math is hard' - so let's do less of it. Now we only have to
-   * call Math.sin twice - rather than my previous 11 - and store the results
-   * in the phases array, which is referenced by the subsequent for loop.
-   */
-  var phases = [];
-  phases[0] = Math.sin(place/1000);
-  phases[1] = Math.sin(place/1000 + 1);
+  var place = document.body.scrollTop,
+    pixels,
+    phases = [];
+  // These calculations use magic numbers I refined to my tastes iteratively
+  phases[0] = Math.sin(place/700);
+  phases[1] = Math.sin(place/1100+2.7);
   for (var i = 0; i < floaterCount; i++) {
-    //floatPizzas[i].style.left = floatPizzas[i].basicLeft + 100 * phases[i%2] + 'px';
-    floatPizzas[i].style.transform = translateX(floatPizzas[i].basicLeft + 100 + 'px');
+    pixels = parseFloat(floatPizzas[i].basicLeft) + 60 * phases[i%2];
+    floatPizzas[i].style.transform = 'translateX(' + pixels + 'px)';
   }
-  /* User Timing API to the rescue again. Seriously, it's worth learning.
-   * Super easy to create custom metrics.
-   */
+  // User Timing API makes it easy to create custom metrics.
   window.performance.mark('mark_end_frame');
   window.performance.measure('measure_frame_duration', 'mark_start_frame', 'mark_end_frame');
   if (frame % 10 === 0) {
@@ -568,8 +565,9 @@ var dropFloaters = function() {
     // Removed .height and .width from JS to CSS control
     elem.className = 'floater';
     elem.src = 'images/pizza.png';
-    elem.basicLeft = Math.floor(((i % cols) + 0.5) * col_space);
+    elem.basicLeft = Math.floor(((i % cols) + 0.5) * col_space) - doc_width/2;
     elem.style.top = ((Math.floor(i / cols) + 0.3) * row_space) + 'px';
+    elem.style.transform = 'translateX(50px)';
     // Changed this from document.querySelector('#movingPizzas1')
     document.getElementById('movingPizzas1').appendChild(elem);
   }
