@@ -382,7 +382,6 @@ var pizzaElementGenerator = function(i) {
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
 
-
   pizzaDescriptionContainer.classList.add('col-md-6');
 
   pizzaName = document.createElement('h4');
@@ -515,7 +514,7 @@ var floatPizzas;
 function updatePositions() {
   frame++;
   window.performance.mark('mark_start_frame');
-  //var floatPizzas = document.querySelectorAll('.mover'); // floatPizzas var got globalized like the economy
+  //var floatPizzas = document.querySelectorAll('.floater'); // floatPizzas var got globalized like the economy
   /* I added this 'place' var so the document object would only have
    * to be queried once per frame update.
    */
@@ -528,7 +527,8 @@ function updatePositions() {
   phases[0] = Math.sin(place/1000);
   phases[1] = Math.sin(place/1000 + 1);
   for (var i = 0; i < floaterCount; i++) {
-    floatPizzas[i].style.left = floatPizzas[i].basicLeft + 100 * phases[i%2] + 'px';
+    //floatPizzas[i].style.left = floatPizzas[i].basicLeft + 100 * phases[i%2] + 'px';
+    floatPizzas[i].style.transform = translateX(floatPizzas[i].basicLeft + 100 + 'px');
   }
   /* User Timing API to the rescue again. Seriously, it's worth learning.
    * Super easy to create custom metrics.
@@ -558,7 +558,6 @@ var dropFloaters = function() {
       doc_width = document.documentElement.clientWidth,
       col_space = (doc_width > 600 ? 240 : 160)
       cols = Math.floor(doc_width / col_space),
-      rad = col_space / 10,
       pies = rows * cols;
 
   /* I am decreasing the total number of floating pies. Only 24 (three rows)
@@ -566,11 +565,9 @@ var dropFloaters = function() {
    */
   for (var i = 0; i < pies; i++) {
     var elem = document.createElement('img');
-    elem.className = 'mover';
+    // Removed .height and .width from JS to CSS control
+    elem.className = 'floater';
     elem.src = 'images/pizza.png';
-    elem.style.height = 4 * rad + 'px';
-    // I trimmed width down to an integer value
-    elem.style.width = 3 * rad + 'px';
     elem.basicLeft = Math.floor(((i % cols) + 0.5) * col_space);
     elem.style.top = ((Math.floor(i / cols) + 0.3) * row_space) + 'px';
     // Changed this from document.querySelector('#movingPizzas1')
@@ -580,8 +577,8 @@ var dropFloaters = function() {
    * won't change with scrolling. So we reference the collection
    * once, here. Note the updatePosition() definition above.
    */
-  // Changed this from document.querySelector('.mover')
-  floatPizzas = document.getElementsByClassName('mover');
+  // Changed this from document.querySelector('.floater')
+  floatPizzas = document.getElementsByClassName('floater');
   floaterCount = floatPizzas.length;
   updatePositions();
 };
